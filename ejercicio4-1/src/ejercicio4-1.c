@@ -40,6 +40,8 @@ int main(void) {
 	int validacionRetorno;
 	int validacion;
 	int opcionMenu;
+	float acumuladorDinero = 0;
+
 
 
 
@@ -67,13 +69,15 @@ int main(void) {
 			case 1:
 				validacion = UTN_getFloat(&saldoInicial, "Ingrese su base de dinero : \n", "opcion incorrecta", 100000,1,1);
 
-				if(validacion == 0 && ingresarDinero == 0 && extraerDinero == 0){
+				if(validacion == 0 && acumuladorDinero == 0){
 
                   saldo = saldoInicial;
-					printf("Su saldo  es: %.2f", saldo);
+					printf("Su saldo  es: %.2f \n", saldo);
+
+					acumuladorDinero = saldo + acumuladorDinero ;
 				}
 				else{
-					printf("Su saldo fue mal ingresado.\n");
+					printf("No es posible ingresar base de dinero.\n");
 				}
 				break;
 
@@ -82,12 +86,19 @@ int main(void) {
 
 					if(validacion == 0 ){
 
-                          saldo = ingresarDinero + saldoInicial;
+
+                          saldo = ingresarDinero + acumuladorDinero;
+
                           printf("Su saldo  es: %.2f", saldo);
+
+                         acumuladorDinero = saldo;
 								}
-					else{
-	    					printf("Su saldo fue mal ingresado.\n");
-								}
+
+
+					else {
+						 printf("Su saldo fue mal ingresado.\n");
+					}
+
 
 				break;
 
@@ -96,8 +107,11 @@ int main(void) {
 
 					if(validacion == 0 ){
 
-                         saldo = ingresarDinero + saldoInicial - extraerDinero;
+                         saldo = acumuladorDinero - extraerDinero;
 						printf("Su saldo  es: %.2f", saldo );
+
+						acumuladorDinero = saldo;
+
 							}
 					else{
 						printf("Su saldo fue mal ingresado.\n");
@@ -109,7 +123,7 @@ int main(void) {
 			case 4:
 
 
-				printf("Gracias");
+				printf("Hasta la proxima! \n  su saldo es: %.2f", acumuladorDinero);
 
 
 				break;
